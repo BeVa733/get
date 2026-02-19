@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO
 import time
 
 GPIO.setmode(GPIO.BCM)
-dac_bits = []
+dac_bits = [16, 20, 21, 25, 26, 17, 27, 22]
 GPIO.setup(dac_bits, GPIO.OUT)
 
 dynamic_range = 3.3
@@ -25,6 +25,7 @@ try:
         try:
             voltage = float(input("Введите напряжение в Вольтах: "))
             number = voltage_to_number(voltage)
+            print(number)
             number_to_dac(number)
 
         except ValueError:
