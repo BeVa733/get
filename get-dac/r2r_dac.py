@@ -19,8 +19,8 @@ class R2R_DAC:
             print(f"Напряжение выходит за динамический диапазон ЦАП (0.00 - {self.dynamic_range:.2f} В)")
             print("Устанавлниваем 0.0 В")
             return 0
-        if self.verbose:
-            print(10)
+        # if self.verbose:
+        #     print(10)
         bin_V = int(voltage / self.dynamic_range * 255)
         dac_val = [int(element) for element in bin(bin_V)[2:].zfill(8)]
         GPIO.output(self.gpio_bits, dac_val)

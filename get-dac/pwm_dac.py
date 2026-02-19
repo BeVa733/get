@@ -8,7 +8,7 @@ class PWM_DAC:
         self.verbose = verbose
 
         GPIO.setmode(GPIO.BCM)
-        GPIO.setup(self.gpio_pin, GPIO.OUT, initial = 0)
+        GPIO.setup(self.gpio_pin, GPIO.OUT)
         self.pwm = GPIO.PWM(self.gpio_pin, self.freq)
         self.pwm.start(0)
 
@@ -25,7 +25,8 @@ class PWM_DAC:
             print("Устанавливаем 0.0 В")
             duty_cycle = 0
         self.pwm.ChangeDutyCycle(duty_cycle)
-        print(f"Коэффициент заполнения {duty_cycle:.2f} B")
+        if self.verbose:
+            print(f"Коэффициент заполнения {duty_cycle:.2f}%")
 
 if __name__ == "__main__":
     try:
