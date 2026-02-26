@@ -4,7 +4,7 @@ import time
 import matplotlib.pyplot as plt
 import numpy as np
 
-amplitude = 3.2
+amplitude = 3.0
 signal_frequency = 10
 sampling_frequency = 1000
 voltage = []
@@ -22,12 +22,3 @@ try:
         sg.wait_for_sampling_period(sampling_frequency)
 finally:
     dac.deinit()
-    # t = np.arange(0, max(times), 1/sampling_frequency)
-    # sawtooth = (amplitude * 2 * signal_frequency * t) % (2*amplitude)
-    # triangle = amplitude - np.abs(sawtooth - amplitude)
-    # plt.plot(t, triangle)
-    # plt.title("Треугольный сигнал")
-    # plt.xlabel('Время')
-    # plt.ylabel('Амплитуда')
-    # plt.grid()
-    # plt.show()

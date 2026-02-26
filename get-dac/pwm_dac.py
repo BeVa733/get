@@ -22,6 +22,7 @@ class PWM_DAC:
             duty_cycle = (voltage / self.dynamic_range * 100)
         else:
             print(f"Напряжение выходит за динамический диапазон ЦАП (0.00 - {self.dynamic_range:.2f} В)")
+            print(voltage)
             print("Устанавливаем 0.0 В")
             duty_cycle = 0
         self.pwm.ChangeDutyCycle(duty_cycle)
