@@ -4,7 +4,7 @@ import time
 GPIO.setmode(GPIO.BCM)
 
 class R2R_ADC:
-    def __init__(self, dynamic_range, compare_time = 0.1, verbose = False):
+    def __init__(self, dynamic_range, compare_time = 0.001, verbose = False):
         self.dynamic_range = dynamic_range
         self.verbose = verbose
         self.compare_time = compare_time
@@ -27,7 +27,7 @@ class R2R_ADC:
     def sequential_counting_adc(self):
         for dac_value in range(256):
             self.number_to_dac(dac_value)
-            time.sleep(compare_time)
+            time.sleep(self.compare_time)
             comparator_output = GPIO.input(self.comp_gpio)
             if comparator_output == 1:
                 return dac_value
@@ -43,6 +43,6 @@ if __name__ == "__main__":
         r2r_adc = R2R_ADC(3.3)
         while True:
             voltage = r2r_adc.get_sc_voltage()
-            print(f'Напряжение: {voltage} В')
+            print(f"Напряжение: {voltage:.2f} В")
     finally:
         r2r_adc.deinit()

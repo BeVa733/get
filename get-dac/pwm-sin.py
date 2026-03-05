@@ -12,8 +12,8 @@ try:
     start_time = time.time()
     while True:
         current_time = time.time() - start_time
-        signal = amplitude * sg.get_sin_wave_amplitude(signal_frequency, current_time)
+        signal = amplitude * sgen.get_sin_wave_amplitude(signal_frequency, current_time)
         dac.set_voltage(signal)
-        sg.wait_for_sampling_period(sampling_frequency)
+        sgen.wait_for_sampling_period(sampling_frequency)
 finally:
     dac.deinit()
