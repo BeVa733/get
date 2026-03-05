@@ -1,6 +1,6 @@
-import r2r-adc
+import r2r_adc
 import time
-import adc-plot
+import adc_plot
 
 r2r = r2r_adc.R2R_ADC(3.3)
 voltage_values = []
