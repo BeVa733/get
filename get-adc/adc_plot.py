@@ -1,11 +1,11 @@
 import matplotlib.pyplot as plt
 
-def plot_voltage_vs_time(time, voltage, max_voltage):
+def plot_voltage_vs_time(time, voltage, max_voltage, duration):
     plt.figure(figsize=(10,6))
     plt.plot(time, voltage)
     plt.title("График зависимости напряжения на входе АЦП от времени")
-    plt.xlim(0, 3)
-    plt.ylim(0, 3.5)
+    plt.xlim(0, duration)
+    plt.ylim(0, max_voltage*1.1)
     plt.grid()
     plt.xlabel("Время, с")
     plt.ylabel("Напряжение, В")
@@ -17,7 +17,6 @@ def plot_sampling_period_hist(time):
         period = time[i] - time[i-1]
         sampling_periods.append(period)
     plt.figure(figsize=(10,6))
-    plt.hist(sampling_periods)
-    plt.xlim(0, 0.06)
+    plt.hist(sampling_periods, bins = 20)
     plt.grid()
     plt.show()
