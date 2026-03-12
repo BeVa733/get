@@ -1,10 +1,10 @@
 import RPi.GPIO as GPIO
 import time
 
-GPIO.setmode(GPIO.BCM)
+    GPIO.setmode(GPIO.BCM)
 
 class R2R_ADC:
-    def __init__(self, dynamic_range, compare_time = 0.001, verbose = False):
+    def __init__(self, dynamic_range, compare_time = 0.1, verbose = False):
         self.dynamic_range = dynamic_range
         self.verbose = verbose
         self.compare_time = compare_time
@@ -27,17 +27,14 @@ class R2R_ADC:
     def sequential_counting_adc(self):
         for dac_value in range(256):
             self.number_to_dac(dac_value)
-            time.sleep(self.compare_time)
+            time.sleep(0.0001)
             comparator_output = GPIO.input(self.comp_gpio)
             if comparator_output == 1:
                 return dac_value
         return 255
 
     def get_sc_voltage(self):
-        if __name__ == "__main__":
-            digital_value = self.sequential_counting_adc()
-        else:
-            digital_value = self.successive_approximation_adc()
+        digital_value = self.sequential_counting_adc()
         voltage = (digital_value / 255) * self.dynamic_range
         return voltage
 
@@ -55,11 +52,16 @@ class R2R_ADC:
                 low = value
         return value
 
+    def get_sar_voltage(self):
+        digital_value = self.successive_approximation_adc()
+        voltage = (digital_value / 255) * self.dynamic_range
+        return voltage
+
 if __name__ == "__main__":
     try:
         r2r_adc = R2R_ADC(3.3)
         while True:
-            voltage = r2r_adc.get_sc_voltage()
-            print(f"Напряжение: {voltage:.2f} В")
+            voltage = r2r_adc.get_sar_voltage()
+            print(f'Напряжение: {voltage} В')
     finally:
         r2r_adc.deinit()
