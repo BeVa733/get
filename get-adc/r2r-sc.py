@@ -14,6 +14,7 @@ try:
         voltage_values.append(r2r.get_sc_voltage())
         time_values.append(time.time() - start_time)
     adc_plot.plot_voltage_vs_time(time_values, voltage_values, 3.3, duration)
+    adc_plot.plot_sampling_period_hist(time_values)
 
 finally:
     r2r.deinit()
