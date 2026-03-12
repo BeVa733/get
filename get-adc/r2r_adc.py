@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 
-    GPIO.setmode(GPIO.BCM)
+GPIO.setmode(GPIO.BCM)
 
 class R2R_ADC:
     def __init__(self, dynamic_range, compare_time = 0.1, verbose = False):
@@ -62,6 +62,7 @@ if __name__ == "__main__":
         r2r_adc = R2R_ADC(3.3)
         while True:
             voltage = r2r_adc.get_sar_voltage()
-            print(f'Напряжение: {voltage} В')
+            print(f'Напряжение: {voltage:.2f} В')
+            time.sleep(1)
     finally:
         r2r_adc.deinit()
